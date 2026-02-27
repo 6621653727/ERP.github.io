@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Itim&family=Noto+Serif+Thai:wght@100..900&display=swap');
+
+body {
+    /* ปรับ Font หลักให้ดูโปรด้วย Inter */
+    font-family: 'Inter', sans-serif; 
+    margin: 0;
+    overflow: hidden;
+    overflow-y: auto;
+    background-color: #ffffff;
+    background-image: url("img/wall.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.container {
+    margin-top: 140px;
+    position: relative;
+    margin-left: 120px;
+    margin-right: 80px;
+    /* ปรับให้ขาวขึ้นนิดหนึ่งเพื่อให้ตัวหนังสือดำอ่านง่าย */
+    background: rgba(255, 255, 255, 0.6); 
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px); /* เพิ่มความเบลอหลังกระจกให้ดูหรู */
+    box-shadow: 0px 4px 28px 0px #ff6b1c;
+}
+
+/* ปรับชื่อเมนู/ชื่อสินค้าให้เป็นสีดำ */
+.namemain {
+    font-size: 16px;
+    font-weight: 800;
+    color: #000000; /* เปลี่ยนจากขาวเป็นดำ */
+    margin-bottom: 5px;
+    transition: all 0.4s ease-in-out;
+}
+
+/* ปรับคำอธิบายให้เป็นสีเทาเข้ม */
+.description {
+    font-size: 13px;
+    color: #333333; /* เปลี่ยนจากขาวเป็นเทาเข้ม */
+    line-height: 1.5;
+}
+
+/* ส่วนหัวสรุประบบ */
+.products {
+    color: #C64400; /* ปรับสีหัวข้อให้เข้ากับ Theme ส้ม-น้ำตาล */
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ปรับปุ่มให้ดูสะอาดขึ้น */
+button {
+    width: 100%;
+    background: #4c1b00; /* สีน้ำตาลเข้มตาม Theme */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #C64400;
+}
+
+.back {
+    height: 70px;
+    width: 100%;
+    padding: .5rem 1.5rem;
+    background: linear-gradient(to right, #4c1b00, #C64400);
+    max-width: 100%;
+    margin-top: -10px;
+    margin-left: -8px;
+    display: flex;
+    align-items: center; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
+    top: 0;
+    border-bottom: 3px solid #C64400;
+    position: fixed;
+    box-shadow: 0px 4px 24px rgba(198, 68, 0, 0.5);
+    z-index: 9999;
+}
+
+.dis {
+    display: flex;
+    width: 100%;
+    margin-left: 60px;
+    margin-right: 60px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.T {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+/* ส่วนของ Grid สินค้า */
+.product {
+    background: rgba(255, 255, 255, 0.3); /* ใส่พื้นหลังอ่อนๆ ให้แต่ละ Item */
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* ส่วนของรูป */
+.picpreview {
+    width: 100%; /* ปรับให้เต็มกรอบ */
+    height: 150px;
+    object-fit: cover;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Japan Import Shop | Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* บังคับ Grid แถวละ 4 ให้เป๊ะและยิ่งใหญ่ */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* เรียง 4 บล็อกต่อแถว */
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        /* เน้นตัวหนังสือดำตามสั่ง */
+        .namemain {
+            color: #000000 !important; /* ดำสนิท */
+            font-size: 18px;
+            font-weight: 900;
+            margin-top: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        .description {
+            color: #1a1a1a !important; /* เทาเข้มเกือบดำ */
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        /* ปรับแต่งการแสดงผล Card ให้ดูพรีเมียม */
+        .product {
+            background: rgba(255, 255, 255, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.05);
+        }
+
+        /* ป้ายสถานะสินค้า */
+        .badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 5px 12px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 900;
+            z-index: 10;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+<div class="back">
+    <div class="dis">
+        <div class="T" style="font-weight: 900; letter-spacing: 2px;">Takahashi Shop</div>
+        <a href="index.html" class="T">แผงควบคุม</a>
+        <a href="bakery.html" class="T">ร้านเบเกอรี่</a>
+        <a href="japan.html" class="T" style="color: #ff6b1c; font-weight: 900; border-bottom: 2px solid #ff6b1c;">ร้านญี่ปุ่น</a>
+        <a href="box.html" class="T">ร้านกล่อง</a>
+        <a href="shipping.html" class="T">จัดส่ง</a>
+        <a href="erp.html" class="T">ERP</a>
+    </div>
+</div>
+
+<h2>Inventory Management: Japan Section</h2>
+
+<div class="container">
+    <div class="card">
+        
+
+        <div class="products" style="text-align: left; margin-bottom: 30px;">
+            <span style="background: #000; color: white; padding: 8px 20px; border-radius: 12px; font-size: 13px; cursor: pointer; font-weight: bold;">หมวดหมู่ทั้งหมด</span>
+            <span style="color: #000; margin-left: 20px; font-size: 13px; cursor: pointer; font-weight: 600;">🍡 ขนม & ของกิน</span>
+            <span style="color: #000; margin-left: 20px; font-size: 13px; cursor: pointer; font-weight: 600;">✏️ เครื่องเขียน</span>
+            <span style="color: #000; margin-left: 20px; font-size: 13px; cursor: pointer; font-weight: 600;">🏠 ของใช้ในบ้าน</span>
+        </div>
+
+        <div class="grid">
+            
+            <div class="product">
+                <div class="badge" style="background: #C64400; color: white;">Best Seller</div>
+                <img src="images/Banana.png" class="picpreview" style="width: 100%; height: 160px; object-fit: cover;">
+                <div class="opa">
+                    <div class="namemain">Tokyo Banana
+1 กล่อง 8 ชิ้น</div>
+                    <div class="description">
+                        ราคา: <strong style="color: #000;">420 บาท</strong><br>
+                        คลัง: <span style="color: #27ae60; font-weight: bold;">คงเหลือ 24 ชิ้น</span>
+                    </div>
+                    <button class="deletebutton" style="width: 100%; border-radius: 12px;">จัดการสินค้า</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="badge" style="background: #3498db; color: white;">Imported</div>
+                <img src="images/Shi.svg" class="picpreview" style="width: 100%; height: 160px; object-fit: cover;">
+                <div class="opa">
+                    <div class="namemain">Shiroi Koibito
+1 กล่อง 18 ชิ้น</div>
+                    <div class="description">
+                        ราคา: <strong style="color: #000;">599 บาท</strong><br>
+                        คลัง: <span style="color: #27ae60; font-weight: bold;">คงเหลือ 10 ชิ้น</span>
+                    </div>
+                    <button class="deletebutton" style="width: 100%; border-radius: 12px;">จัดการสินค้า</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="badge" style="background: #f39c12; color: white;">Low Stock</div>
+                <img src="images/DE.jpeg" class="picpreview" style="width: 100%; height: 160px; object-fit: cover;">
+                <div class="opa">
+                    <div class="namemain">Demon Slayer model 1 ตัว</div>
+                    <div class="description">
+                        ราคา: <strong style="color: #000;">340 บาท</strong><br>
+                        คลัง: <span style="color: #e67e22; font-weight: bold;">เหลือเพียง 2 ชิ้น</span>
+                    </div>
+                    <button class="deletebutton" style="width: 100%; border-radius: 12px;">จัดการสินค้า</button>
+                </div>
+            </div>
+
+            <div class="product" style="opacity: 0.8;">
+                <div class="badge" style="background: #333; color: white;">Sold Out</div>
+                <img src="images/HA.jpeg" class="picpreview" style="width: 100%; height: 160px; object-fit: cover; filter: grayscale(100%);">
+                <div class="opa">
+                    <div class="namemain">แฮมชีสขนมญี่ปุ่น
+6 ชิ้น</div>
+                    <div class="description">
+                        ราคา: <strong style="color: #000;">160 บาท</strong><br>
+                        คลัง: <span style="color: red; font-weight: bold;">สินค้าหมด</span>
+                    </div>
+                    <button class="deletebutton" style="width: 100%; border-radius: 12px; background: #95a5a6;">รอเติมสินค้า</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="cart">
+    <div style="background: #ffffff; border: 1px solid #000; padding: 20px; border-radius: 25px; box-shadow: 0 15px 45px rgba(0,0,0,0.2); width: 220px;">
+        <div style="color: #000; font-weight: 900; font-size: 14px; margin-bottom: 10px; border-bottom: 2px solid #eee; padding-bottom: 5px;">📦 รายการจัดเตรียม</div>
+        <div style="color: #333; font-size: 13px;">2 รายการเลือกอยู่</div>
+        <div style="color: #C64400; font-size: 18px; font-weight: 900; margin: 10px 0;">฿ 239.00</div>
+        <button class="deletebutton" style="width: 100%; height: 45px; font-weight: bold; font-size: 14px;">ยืนยันคำสั่งซื้อ</button>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PackShop - ศูนย์รวมบรรจุภัณฑ์คุณภาพ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2d3e50;
+            --accent: #4a6741;
+            --bg: #f8f9fa;
+            --white: #ffffff;
+            --text: #333333;
+            --light-gray: #e9ecef;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Kanit', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); overflow-x: hidden; }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); letter-spacing: -1px; }
+        .logo span { color: var(--accent); }
+
+        .search-bar {
+            flex: 0 1 400px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 1px solid var(--light-gray);
+            background: #f1f3f5;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-bar input:focus { background: white; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(74, 103, 65, 0.1); }
+
+        .cart-btn {
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background: #d63031;
+            color: white;
+            font-size: 11px;
+            padding: 2px 7px;
+            border-radius: 50%;
+            font-weight: 600;
+        }
+
+        /* --- CATEGORY TABS --- */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 30px 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 10px 25px;
+            background: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #666;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .tab.active { background: var(--primary); color: white; transform: translateY(-2px); }
+
+        /* --- PRODUCT GRID --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 60px; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid #f0f0f0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover { transform: translateY(-10px); box-shadow: var(--shadow); }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            background: #f8f9fa;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-img img { width: 100%; height: 100%; object-fit: cover; }
+
+        .tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 4px 12px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .card-body { padding: 20px; flex-grow: 1; }
+        .card-cat { font-size: 11px; color: var(--accent); font-weight: 600; text-transform: uppercase; margin-bottom: 5px; }
+        .card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; color: var(--primary); }
+        .card-desc { font-size: 13px; color: #888; margin-bottom: 15px; }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .price { font-size: 1.2rem; font-weight: 700; color: var(--text); }
+        .price small { font-size: 11px; color: #aaa; font-weight: 400; }
+
+        .btn-add {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .btn-add:hover { background: var(--accent); }
+
+        /* --- SIDE PANELS (Cart & Menu) --- */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: none;
+        }
+
+        .panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 100%;
+            max-width: 380px;
+            height: 100%;
+            background: white;
+            z-index: 2001;
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel.active { right: 0; }
+        .panel-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .panel-body { flex-grow: 1; overflow-y: auto; padding: 20px; }
+        .panel-footer { padding: 20px; border-top: 1px solid #eee; }
+
+        /* --- CART ITEMS --- */
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f8f9fa;
+        }
+        .cart-item img { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; }
+        .cart-info h4 { font-size: 14px; margin-bottom: 5px; }
+        .cart-ctrl { display: flex; align-items: center; gap: 10px; }
+        .cart-ctrl button { border: 1px solid #ddd; background: none; width: 25px; height: 25px; border-radius: 5px; cursor: pointer; }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* --- TOAST --- */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            z-index: 3000;
+            transition: var(--transition);
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        @media (max-width: 600px) {
+            .search-bar { display: none; }
+            .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
+            .card-img { height: 140px; }
+            .card-title { font-size: 0.9rem; }
+            .btn-add { width: 100%; margin-top: 10px; }
+            .card-footer { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <button class="botton" onclick="toggleMenu()">☰</button>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="ค้นหากล่อง ถุง แก้ว..." oninput="handleSearch()">
+    </div>
+    <button class="cart-btn" onclick="toggleCart(true)">
+        🛒 <span class="badge" id="cartBadge">0</span>
+    </button>
+</header>
+
+<div class="tabs-container">
+    <div class="tab active" onclick="filterCat('all', this)">ทั้งหมด</div>
+    <div class="tab" onclick="filterCat('bakery', this)">เบเกอรี่</div>
+    <div class="tab" onclick="filterCat('japan', this)">อาหารญี่ปุ่น</div>
+    <div class="tab" onclick="filterCat('general', this)">ทั่วไป</div>
+</div>
+
+<div class="container">
+    <div class="grid" id="productGrid">
+        </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="toggleCart(false)"></div>
+<div class="panel" id="cartPanel">
+    <div class="panel-header">
+        <h3>ตะกร้าสินค้า</h3>
+        <button onclick="toggleCart(false)" style="background:none; border:none; font-size:1.2rem; cursor:pointer;">✕</button>
+    </div>
+    <div class="panel-body" id="cartItems">
+        </div>
+    <div class="panel-footer">
+        <div style="display:flex; justify-content:space-between; margin-bottom:15px; font-weight:700;">
+            <span>ยอดรวมสุทธิ</span>
+            <span id="cartTotal">฿0</span>
+        </div>
+        <button class="btn-checkout">ยืนยันการสั่งซื้อ</button>
+    </div>
+</div>
+
+<div class="toast" id="toast">เพิ่มสินค้าแล้ว!</div>
+
+<script>
+    const products = [
+        // 📌 ตรง img: '' ให้ใส่ชื่อไฟล์รูปภาพของนายลงไปในเครื่องหมายคำพูดนะ (เช่น img: 'images/foam-box.png')
+        { id: 1, cat: 'general', tag: 'HOT', tagName: 'rt-hot', name: 'กล่องโฟมใส่อาหาร M', desc: '25 ชิ้น · Food Grade', price: 45, img: 'images/foam.jpg' /* <-- ใส่ไฟล์รูปกล่องโฟมตรงนี้ */ },
+        { id: 2, cat: 'general', tag: 'NEW', tagName: 'rt-new', name: 'กล่องกระดาษเหลี่ยม', desc: '50 ชิ้น · กันน้ำมัน', price: 55, img: 'images/paper.jpg' /* <-- ใส่ไฟล์รูปกล่องกระดาษเหลี่ยมตรงนี้ */ },
+        { id: 3, cat: 'bakery', tag: 'SALE', tagName: 'rt-sale', name: 'กล่องเค้ก 2 ปอนด์', desc: '10 ใบ · ชมพูพาสเทล', price: 120, img: 'images/cake-box.jpg' /* <-- ใส่ไฟล์รูปกล่องเค้กตรงนี้ */ },
+        { id: 4, cat: 'japan', tag: 'HOT', tagName: 'rt-hot', name: 'กล่องเบนโตะ 5 ช่อง', desc: '25 ชุด · แถมฝา', price: 150, img: 'images/bento-box.jpg' /* <-- ใส่ไฟล์รูปกล่องเบนโตะตรงนี้ */ },
+        { id: 5, cat: 'bakery', tag: '', tagName: '', name: 'ถุงขนมปังคราฟท์', desc: '100 ใบ · หน้าต่างใส', price: 65, img: 'images/bread-bag.jpg' /* <-- ใส่ไฟล์รูปถุงขนมปังคราฟท์ตรงนี้ */ },
+        { id: 6, cat: 'japan', tag: 'NEW', tagName: 'rt-new', name: 'ถาดซูชิ ลายซากุระ', desc: '25 ชุด · ฝาใส', price: 110, img:'images/sushi-tray.jpg' /* <-- ใส่ไฟล์รูปถาดซูชิตรงนี้ */ }
+    ];
+
+    let cart = [];
+
+    function renderProducts(data) {
+        const grid = document.getElementById('productGrid');
+        grid.innerHTML = data.map(p => `
+            <div class="card">
+                <div class="card-img">
+                    ${p.tag ? `<span class="tag" style="background:${getTagColor(p.tag)}">${p.tag}</span>` : ''}
+                    ${p.img ? `<img src="${p.img}" alt="${p.name}">` : '<div style="color: #ccc; font-size: 0.9rem;">(รอใส่รูปภาพ)</div>'}
+                </div>
+                <div class="card-body">
+                    <p class="card-cat">${p.cat}</p>
+                    <h3 class="card-title">${p.name}</h3>
+                    <p class="card-desc">${p.desc}</p>
+                    <div class="card-footer">
+                        <div class="price">฿${p.price} <small>/แพ็ค</small></div>
+                        <button class="btn-add" onclick="addToCart(${p.id})">+ เพิ่ม</button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function getTagColor(tag) {
+        if (tag === 'HOT') return '#e67e22';
+        if (tag === 'NEW') return '#27ae60';
+        if (tag === 'SALE') return '#c0392b';
+        return '#999';
+    }
+
+    function filterCat(cat, el) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        el.classList.add('active');
+        const filtered = cat === 'all' ? products : products.filter(p => p.cat === cat);
+        renderProducts(filtered);
+    }
+
+    function handleSearch() {
+        const q = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = products.filter(p => p.name.toLowerCase().includes(q));
+        renderProducts(filtered);
+    }
+
+    function toggleCart(show) {
+        document.getElementById('cartPanel').classList.toggle('active', show);
+        document.getElementById('overlay').style.display = show ? 'block' : 'none';
+    }
+
+    function addToCart(id) {
+        const p = products.find(i => i.id === id);
+        const ex = cart.find(i => i.id === id);
+        if (ex) ex.qty++; else cart.push({ ...p, qty: 1 });
+        updateCart();
+        showToast(`เพิ่ม ${p.name} แล้ว`);
+    }
+
+    function updateCart() {
+        const container = document.getElementById('cartItems');
+        const totalBadge = document.getElementById('cartBadge');
+        const totalText = document.getElementById('cartTotal');
+        
+        const count = cart.reduce((a, b) => a + b.qty, 0);
+        const sum = cart.reduce((a, b) => a + (b.price * b.qty), 0);
+
+        totalBadge.textContent = count;
+        totalText.textContent = '฿' + sum.toLocaleString();
+
+        if (cart.length === 0) {
+            container.innerHTML = '<p style="text-align:center; color:#ccc; margin-top:50px;">ตะกร้าว่างเปล่า</p>';
+            return;
+        }
+
+        container.innerHTML = cart.map((item, idx) => `
+            <div class="cart-item">
+                ${item.img ? `<img src="${item.img}">` : '<div style="width: 60px; height: 60px; background: #eee; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #aaa;">No Img</div>'}
+                <div class="cart-info" style="flex:1">
+                    <h4>${item.name}</h4>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <div class="cart-ctrl">
+                            <button onclick="changeQty(${idx}, -1)">−</button>
+                            <span>${item.qty}</span>
+                            <button onclick="changeQty(${idx}, 1)">+</button>
+                        </div>
+                        <span style="font-weight:600">฿${(item.price * item.qty).toLocaleString()}</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function changeQty(idx, diff) {
+        cart[idx].qty += diff;
+        if (cart[idx].qty <= 0) cart.splice(idx, 1);
+        updateCart();
+    }
+
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    // Initial Render
+    renderProducts(products);
+</script>
+
+</body>
+</html>
