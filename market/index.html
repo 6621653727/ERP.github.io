@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Shop Manager Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <style>
+        /* บังคับ Grid ให้เรียงแถวละ 4 ตัวเลือกเพื่อความโปร */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        /* ปรับสีตัวอักษรใน Card ให้เป็นดำ/เทาเข้ม ตามโจทย์ */
+        .namemain {
+            color: #000000 !important;
+            font-weight: 900;
+        }
+        .description {
+            color: #333333 !important;
+            font-weight: 500;
+        }
+        /* ปรับสไตล์ Card ให้นวลตาขึ้น */
+        .product {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="back">
+        <div class="dis">
+            <div class="T" style="font-family: 'Inter'; font-weight: 900; letter-spacing: 2px;">ร้านค้าออนไลน์</div>
+            <a href="dashboard.html" class="T" style="color: #ff6b1c; font-weight: 900;"> แผงควบคุม</a>
+            <a href="bakery.html" class="T"> เบเกอรี่</a>
+            <a href="japan.html" class="T"> สินค้าญี่ปุ่น</a>
+            <a href="box.html" class="T"> ร้านกล่อง</a>
+            <a href="shipping.html" class="T">ขนส่ง</a>
+            <a href="erp.html" class="T"> ตั้งค่า/ERP</a>
+        </div>
+    </div>
+
+    <h2>ระบบจัดการร้านค้าภาพรวม</h2>
+
+    <div class="container">
+        <div class="card">
+            <div class="products">
+                <h1 style="color: #000; font-family: 'Itim'; font-size: 28px; margin-bottom: 20px;">
+                     สรุปรายงานสถานะทุกสาขา
+                </h1>
+            </div>
+
+            <div class="grid">
+                
+                <div class="product opa">
+                    <img src="images/Shi.svg" class="picpreview" alt="Japan Shop">
+                    <div class="namemain"> JAPAN STORE</div>
+                    <div class="description">
+                        ยอดขาย: <strong style="color: #C64400;">12,500.-</strong><br>
+                        ของเข้าใหม่: 42 ชิ้น
+                    </div>
+                    <button class="deletebutton">จัดการสต็อก</button>
+                </div>
+
+                <div class="product opa">
+                    <img src="images/B.jpg" class="picpreview" alt="Bakery Shop">
+                    <div class="namemain">BAKERY SHOP</div>
+                    <div class="description">
+                        ยอดขาย: <strong style="color: #C64400;">8,300.-</strong><br>
+                        ค้างส่ง: 5 ออเดอร์
+                    </div>
+                    <button class="deletebutton">ดูออเดอร์</button>
+                </div>
+
+                <div class="product opa">
+                    <img src="images/bread-bag.jpg" class="picpreview" alt="Box Shop">
+                    <div class="namemain">BOX & MART</div>
+                    <div class="description">
+                        ยอดขาย: <strong style="color: #C64400;">5,000.-</strong><br>
+                        สต็อกกล่อง: ปกติ
+                    </div>
+                    <button class="deletebutton">เช็คคลัง</button>
+                </div>
+
+                <div class="product opa">
+                    <img src="images/lo.png" class="picpreview" alt="Shipping">
+                    <div class="namemain"> LOGISTICS</div>
+                    <div class="description">
+                        รอส่ง: 12 รายการ<br>
+                        เรือนำเข้า: ถึงท่าเรือ
+                    </div>
+                    <button class="deletebutton">ตามสถานะ</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="cart">
+        <div style="background: white; border: 2px solid #C64400; padding: 15px; border-radius: 20px; color: #000; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+            <strong style="color: #C64400;">แจ้งการอัพเดจสินค้า:</strong><br>
+            ภาษีนำเข้า JTEPA ต้องชำระวันนี้!
+        </div>
+    </div>
+
+</body>
+</html>
