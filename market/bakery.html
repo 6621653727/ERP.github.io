@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Bakery Hub | Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* บังคับ Grid แถวละ 4 สำหรับสินค้าเบเกอรี่ */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        /* เน้นตัวหนังสือสีดำสนิทเพื่อความชัดเจน */
+        .namemain {
+            color: #000000 !important;
+            font-weight: 900;
+            font-size: 17px;
+            margin-top: 15px;
+        }
+
+        .description {
+            color: #333333 !important;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        /* ป้ายบอกสถานะความสดใหม่ */
+        .fresh-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #27ae60;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 10px;
+            font-weight: bold;
+            z-index: 5;
+            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+<div class="back">
+    <div class="dis">
+        <div class="T" style="font-weight: 900; letter-spacing: 1px;">BAKERY TERMINAL</div>
+        <a href="dashboard.html" class="T">Dashboard</a>
+        <a href="bakery.html" class="T" style="color: #ff6b1c; font-weight: 900; border-bottom: 2px solid #ff6b1c;">ร้านเบเกอรี่</a>
+        <a href="japan.html" class="T">ร้านญี่ปุ่น</a>
+        <a href="box.html" class="T">ร้านกล่อง</a>
+        <a href="shipping.html" class="T">จัดส่ง</a>
+        <a href="erp.html" class="T">ERP</a>
+    </div>
+</div>
+
+<h2>Production & Inventory: Bakery Shop</h2>
+
+<div class="container">
+    <div class="card">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px;">
+            <div style="background: rgba(198, 68, 0, 0.05); padding: 15px; border-radius: 12px; border-top: 4px solid #C64400;">
+                <div style="font-size: 10px; color: #666;">อบเสร็จวันนี้</div>
+                <div style="font-size: 20px; font-weight: 900; color: #000;">120 ชิ้น</div>
+            </div>
+            <div style="background: rgba(198, 68, 0, 0.05); padding: 15px; border-radius: 12px; border-top: 4px solid #483030;">
+                <div style="font-size: 10px; color: #666;">ออเดอร์เค้กจอง</div>
+                <div style="font-size: 20px; font-weight: 900; color: #000;">5 ก้อน</div>
+            </div>
+            <div style="background: rgba(198, 68, 0, 0.05); padding: 15px; border-radius: 12px; border-top: 4px solid #27ae60;">
+                <div style="font-size: 10px; color: #666;">วัตถุดิบคงคลัง</div>
+                <div style="font-size: 20px; font-weight: 900; color: #000;">ปกติ ✅</div>
+            </div>
+            <div style="background: rgba(198, 68, 0, 0.05); padding: 15px; border-radius: 12px; border-top: 4px solid #e74c3c;">
+                <div style="font-size: 10px; color: #666;">ใกล้หมดอายุ (Exp)</div>
+                <div style="font-size: 20px; font-weight: 900; color: #000;">2 รายการ</div>
+            </div>
+        </div>
+
+        <div class="grid">
+            
+            <div class="product opa">
+                <div class="fresh-badge">FRESHLY BAKED</div>
+                <img src="img/croissant.jpg" class="picpreview" style="height: 160px; object-fit: cover; border-radius: 10px;">
+                <div class="namemain">ครัวซองต์เนยฝรั่งเศส</div>
+                <div class="description">
+                    <strong>65.00 บาท</strong><br>
+                    รอบการอบ: 08:00 น.<br>
+                    คงเหลือ: <span style="color: #000; font-weight: bold;">12 ชิ้น</span>
+                </div>
+                <button class="deletebutton" style="width: 100%;">เบิกขายหน้าร้าน</button>
+            </div>
+
+            <div class="product opa">
+                <div class="fresh-badge" style="background: #3498db;">PRE-ORDER</div>
+                <img src="img/cake.jpg" class="picpreview" style="height: 160px; object-fit: cover; border-radius: 10px;">
+                <div class="namemain">สตรอว์เบอร์รี่ชอร์ตเค้ก</div>
+                <div class="description">
+                    <strong>750.00 บาท</strong><br>
+                    ขนาด: 1 ปอนด์ (Custom)<br>
+                    สถานะ: <span style="color: #000; font-weight: bold;">กำลังแต่งหน้า</span>
+                </div>
+                <button class="deletebutton" style="width: 100%;">อัปเดตสถานะ</button>
+            </div>
+
+            <div class="product opa">
+                <div class="fresh-badge" style="background: #e67e22;">LIMITED</div>
+                <img src="img/shokupan.jpg" class="picpreview" style="height: 160px; object-fit: cover; border-radius: 10px;">
+                <div class="namemain">โชกุปังนมฮอกไกโด</div>
+                <div class="description">
+                    <strong>120.00 บาท</strong><br>
+                    สูตรนุ่มพิเศษ (ญี่ปุ่น)<br>
+                    คงเหลือ: <span style="color: #000; font-weight: bold;">5 แถว</span>
+                </div>
+                <button class="deletebutton" style="width: 100%;">เบิกขายหน้าร้าน</button>
+            </div>
+
+            <div class="product opa">
+                <div class="fresh-badge" style="background: #9b59b6;">BEST SELLER</div>
+                <img src="img/cookies.jpg" class="picpreview" style="height: 160px; object-fit: cover; border-radius: 10px;">
+                <div class="namemain">ซอฟต์คุกกี้แมคคาเดเมีย</div>
+                <div class="description">
+                    <strong>45.00 บาท</strong><br>
+                    แพ็คเกจ: ถุงซีล<br>
+                    คงเหลือ: <span style="color: #000; font-weight: bold;">28 ห่อ</span>
+                </div>
+                <button class="deletebutton" style="width: 100%;">เบิกขายหน้าร้าน</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="cart">
+    <div style="background: white; border-right: 8px solid #C64400; padding: 20px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); width: 250px;">
+        <div style="color: #000; font-weight: 900; font-size: 15px; margin-bottom: 10px;">🍞 Production Alert</div>
+        <div style="color: #444; font-size: 12px;">เตาอบที่ 1: ใกล้ครบเวลา (2 นาที)</div>
+        <div style="color: #C64400; font-size: 11px; margin-top: 5px;">โปรดเตรียมถาดพักขนม</div>
+    </div>
+</div>
+
+</body>
+</html>
